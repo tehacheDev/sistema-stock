@@ -3,6 +3,7 @@ import { Router } from 'express';
 import { validateBody } from '../../../../shared/middlewares/validate';
 import { productoSchema } from '../../../../shared/schemas/productoSchema';
 import { PostgresProductoRepository } from '../db/PostgresProductoRepository';
+import { BadRequestError, NotFoundError } from '../../../../shared/errors/AppError';
 import { 
   RegistrarProducto, 
   ListarProductos, 
@@ -17,49 +18,49 @@ const eliminarProducto = new EliminarProducto(repo);
 const registrarProducto = new RegistrarProducto(repo);
 const actualizarProducto = new ActualizarProducto(repo);
 
-router.post('/', validateBody(productoSchema), async (req, res) => {
+router.post('/', validateBody(productoSchema), async (req, res, next) => {
   try {
     logger.info('POST /productos');
     const id_producto = await registrarProducto.registrar(req.body);
+    if (isNaN(id_producto)) throw new BadRequestError('ID del producto no válido');
     res.status(201).json({ msj: 'Producto registrado con éxito' , id_producto });
   } catch (error) {
-    logger.error(`Error en POST /productos: ${error instanceof Error ? error.message : String(error)}`);
-    res.status(500).json({ msj: 'Error al crear producto', status: 500 });
+    next(error);
   }
 });
 
-router.get('/', async (req, res) => {
+router.get('/', async (req, res, next) => {
   try {
     logger.info('GET /productos');
     const productos = await listarProductos.listar();
     res.json(productos);
   } catch (error) {
-    logger.error(`Error en GET /productos: ${error instanceof Error ? error.message : String(error)}`);
-    res.status(500).json({ msj: 'Error al obtener productos', status: 500 });
+    next(error);
   }
 });
 
-router.put('/:id', async (req, res) => {
+router.put('/:id', async (req, res, next) => {
   try {
     logger.info('PUT /productos/:id');
     const id = parseInt(req.params.id, 10);
+    if (isNaN(id)) throw new BadRequestError('ID inválido');
     const producto = await actualizarProducto.actualizar(id, req.body);
-    res.json(producto);
+    if (!producto) throw new NotFoundError('Producto no encontrado');
+    res.status(200).json({ msj: 'Producto actualizado con éxito', producto });
   } catch (error) {
-    logger.error(`Error en PUT /productos/:id: ${error instanceof Error ? error.message : String(error)}`);
-    res.status(500).json({ msj: 'Error al actualizar producto', status: 500 });
+    next(error);
   }
 });
 
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', async (req, res, next) => {
   try {
     logger.info('DELETE /productos/:id');
     const id = parseInt(req.params.id, 10);
+    if (isNaN(id)) throw new BadRequestError('ID inválido');
     await eliminarProducto.eliminar(id);
     res.status(204).send();
   } catch (error) {
-    logger.error(`Error en DELETE /productos/:id: ${error instanceof Error ? error.message : String(error)}`);
-    res.status(500).json({ msj: 'Error al eliminar producto', status: 500 });
+    next(error);
   }
 });
 

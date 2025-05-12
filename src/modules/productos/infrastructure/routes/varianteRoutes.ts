@@ -10,6 +10,7 @@ import {
   ActualizarVariante,
   EliminarVariante
 } from '../../application/index';
+import { BadRequestError, NotFoundError } from '../../../../shared/errors/AppError';
 
 const router = Router();
 const repo = new PostgresVarianteRepository();
@@ -18,10 +19,11 @@ const listarVariante = new ListarVariante(repo);
 const actualizarVariante = new ActualizarVariante(repo);
 const eliminarVariante = new EliminarVariante(repo);
 
-router.post('/:id', validateBody(variantesSchema), async (req, res) => {
+router.post('/:id', validateBody(variantesSchema), async (req, res, next) => {
   try {
     logger.info('POST /variantes/:id');
     const id_producto = parseInt(req.params.id, 10);
+    if (isNaN(id_producto)) throw new BadRequestError('ID inválido');
     const variantes = req.body.map((v: ProductoVariante) => ({ ...v, id_producto }));
 
     for (const variante of variantes) {
@@ -29,44 +31,43 @@ router.post('/:id', validateBody(variantesSchema), async (req, res) => {
     }
     res.status(201).json({ msj: 'Variante registrada con éxito' });
   } catch (error) {
-    logger.error(`Error en POST /productos/variante/:id ${error instanceof Error ? error.message : String(error)}`);
-    res.status(500).json({ msj: 'Error al crear variante', status: 500 });
+    next(error);
   }
 });
 
-router.get('/', async (req, res) => {
+router.get('/', async (req, res, next) => {
   try {
     logger.info('GET /variantes');
     const variantes = await listarVariante.listar();
     res.json(variantes);
   } catch (error) {
-    logger.error(`Error en GET /variantes: ${error instanceof Error ? error.message : String(error)}`);
-    res.status(500).json({ msj: 'Error al obtener variantes', status: 500 });
+    next(error);
   }
 }); 
 
-router.put('/:id', validateBody(varianteSchema), async (req, res) => {
+router.put('/:id', validateBody(varianteSchema), async (req, res, next) => {
   try {
     logger.info('PUT /variantes/:id');
     const id = parseInt(req.params.id, 10);
+    if (isNaN(id)) throw new BadRequestError('ID inválido');
     const variante = req.body;
-    await actualizarVariante.actualizar(id, variante);
+    const varianteActualizada = await actualizarVariante.actualizar(id, variante);
+    if (!varianteActualizada) throw new NotFoundError('Variante no encontrada');
     res.status(200).json({ msj: 'Variante actualizada con éxito' });
   } catch (error) {
-    logger.error(`Error en PUT /productos/variante/:id ${error instanceof Error ? error.message : String(error)}`);
-    res.status(500).json({ msj: 'Error al actualizar variante', status: 500 });
+    next(error);
   }
 });
 
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', async (req, res, next) => {
   try {
     logger.info('DELETE /variantes/:id');
     const id = parseInt(req.params.id, 10);
+    if (isNaN(id)) throw new BadRequestError('ID inválido');
     await eliminarVariante.eliminar(id);
     res.status(200).json({ msj: 'Variante eliminada con éxito' });
   } catch (error) {
-    logger.error(`Error en DELETE /productos/variante/:id ${error instanceof Error ? error.message : String(error)}`);
-    res.status(500).json({ msj: 'Error al eliminar variante', status: 500 });
+    next(error);
   }
 });
 

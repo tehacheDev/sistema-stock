@@ -2,8 +2,9 @@ import dotenv from "dotenv";
 import express from "express";
 import './shared/database/connection';
 import * as routes from "./shared/routes/route";
-import { errorHandler } from "./shared/middlewares/errorHandler";
 import { logRequests } from "./shared/middlewares/loggerMiddleware";
+import { NotFoundError } from "./shared/errors/AppError";
+import { errorHandler } from "./shared/middlewares/errorHandler";
 
 dotenv.config();
 
@@ -13,8 +14,6 @@ const app = express();
 app.use(express.json());
 // Middleware para registrar las peticiones
 app.use(logRequests);
-// Middleware para manejar errores
-app.use(errorHandler);
 // Routes
 routes.register(app);
 // Middleware para manejar CORS
@@ -23,5 +22,13 @@ app.use((req, res, next) => {
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();
 });
+// Middleware para rutas no encontradas
+app.use((req, res, next) => {
+  next(new NotFoundError());
+});
+
+// Middleware global de errores (siempre el último)
+app.use(errorHandler);
+
 
 export default app;

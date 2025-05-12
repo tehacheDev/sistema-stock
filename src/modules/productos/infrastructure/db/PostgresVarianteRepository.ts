@@ -32,7 +32,7 @@ export class PostgresVarianteRepository implements VarianteRepository {
     ));
   }
 
-  async actualizarVariante(id_variante: number, variantes: ProductoVariante): Promise<void> {
+  async actualizarVariante(id_variante: number, variantes: ProductoVariante): Promise<ProductoVariante> {
     const query = `
       UPDATE producto_variantes
       SET talle = $1, color = $2, stock_actual = $3
@@ -46,9 +46,12 @@ export class PostgresVarianteRepository implements VarianteRepository {
     ];
 
     await pool.query(query, values);
+
+    return variantes;
   }
 
-  async eliminarVariante(id: number): Promise<void> {
-    await pool.query('DELETE FROM producto_variantes WHERE id_variante = $1', [id]);
+  async eliminarVariante(id: number): Promise<boolean> {
+    const result = await pool.query('DELETE FROM producto_variantes WHERE id_variante = $1', [id]);
+    return (result.rowCount ?? 0) > 0;
   }
 }

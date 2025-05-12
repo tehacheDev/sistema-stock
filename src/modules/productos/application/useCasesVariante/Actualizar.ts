@@ -4,7 +4,7 @@ import { VarianteRepository } from '../../domain/repositories/VarianteRepository
 export class ActualizarVariante {
   constructor(private readonly productoRepo: VarianteRepository) {}
 
-  async actualizar(id_variante: number, data: ProductoVariante): Promise<void> {
+  async actualizar(id_variante: number, data: ProductoVariante): Promise<ProductoVariante> {
     const variante = new ProductoVariante(
       data.id_producto,
       data.talle,
@@ -12,6 +12,8 @@ export class ActualizarVariante {
       data.color
     );
 
-    await this.productoRepo.actualizarVariante(id_variante, variante);
+    const varianteActualizada = await this.productoRepo.actualizarVariante(id_variante, variante);
+    if (!varianteActualizada) throw new Error('Variante no encontrada');
+    return varianteActualizada;
   }
 }

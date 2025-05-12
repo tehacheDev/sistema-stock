@@ -57,8 +57,9 @@ export class PostgresProductoRepository implements ProductoRepository {
     return producto;
   }
 
-  async eliminarProducto(id: number): Promise<void> {
-    await pool.query('DELETE FROM productos WHERE id_producto = $1', [id]);
+  async eliminarProducto(id: number): Promise<boolean> {
+    const result = await pool.query('DELETE FROM productos WHERE id_producto = $1', [id]);
+    return (result.rowCount ?? 0) > 0;
   }
 
 }
