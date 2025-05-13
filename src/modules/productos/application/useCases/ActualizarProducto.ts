@@ -1,11 +1,12 @@
-import { NotFoundError } from '../../../../shared/errors/AppError';
 import { Producto } from '../../domain/entities/Producto';
-import { ProductoRepository } from '../../domain/repositories/ProductoRepository';
+import { ProductoDTO } from '../../application/dtos/ProductoDTO';
+import { NotFoundError } from '../../../../shared/errors/AppError';
+import { IProductoRepository } from '../../domain/repositories/IProductoRepository';
 
 export class ActualizarProducto {
-  constructor(private readonly productoRepo: ProductoRepository) {}
+  constructor(private readonly productoRepo: IProductoRepository) {}
 
-  async actualizar(id_producto: number, data: Producto): Promise<Producto> {
+  async actualizarProducto(id_producto: number, data: ProductoDTO): Promise<number> {
     const producto = new Producto(
       data.nombre,
       data.categoria,
