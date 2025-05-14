@@ -1,10 +1,10 @@
-import { ClienteRepository } from '../../domain/repositories/ClienteRepository';
-import { Cliente } from '../../domain/entities/Cliente';
+import { IClienteRepository } from '../../domain/repositories/IClienteRepository';
+import { ClienteDTO } from '../dtos/ClienteDTO';
 
 export class ListarCliente {
-  constructor(private readonly productoRepo: ClienteRepository) {}
+  constructor(private readonly productoRepo: IClienteRepository) {}
 
-  async listar(): Promise<Cliente[]> {
+  async listar(): Promise<ClienteDTO[]> {
     return await this.productoRepo.obtenerClientes();
   }
 }

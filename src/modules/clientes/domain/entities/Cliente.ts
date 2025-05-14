@@ -3,10 +3,6 @@ export class Cliente {
         public nombre: string,
         public apellido: string,
         public celular: string,
-        public idCliente?: number
+        public id_cliente?: number
     ) {}
-  
-    getNombreCompleto(): string {
-      return `${this.nombre} ${this.apellido}`;
-    }
-}
+  }

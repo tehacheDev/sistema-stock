@@ -1,22 +1,18 @@
 import { Cliente } from "../../domain/entities/Cliente";
-import { ClienteRepository } from "../../domain/repositories/ClienteRepository";
-
-interface InputDTO {
-    nombre: string;
-    apellido: string;
-    celular: string;
-}
+import { ClienteDTO } from "../dtos/ClienteDTO";
+import { IClienteRepository } from "../../domain/repositories/IClienteRepository";
 
 export class RegistrarCliente {
-    constructor(private readonly clienteRepo: ClienteRepository) {}
+    constructor(private readonly clienteRepo: IClienteRepository) {}
 
-    async registrar(data: InputDTO): Promise<void> {
+    async registrar(data: ClienteDTO): Promise<number> {
         const cliente = new Cliente(
             data.nombre,
             data.apellido,
             data.celular
         );
 
-        await this.clienteRepo.crearCliente(cliente);
+        const result = await this.clienteRepo.crearCliente(cliente);
+        return result;
     }
 }

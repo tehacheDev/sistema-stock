@@ -71,6 +71,7 @@ export class PostgresProductoRepository implements IProductoRepository {
       UPDATE productos
       SET nombre = $1, categoria = $2, costo = $3, precio_unitario = $4
       WHERE id_producto = $5
+      returning id_producto
     `;
     const values = [
       producto.nombre,
@@ -90,6 +91,7 @@ export class PostgresProductoRepository implements IProductoRepository {
       UPDATE producto_variantes
       SET talle = $1, stock_actual = $2, color = $3
       WHERE id_variante = $4
+      returning id_variante
     `;
     const values = [
       variante.talle,
