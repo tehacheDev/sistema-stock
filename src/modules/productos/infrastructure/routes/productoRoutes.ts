@@ -1,8 +1,9 @@
 import { Router } from 'express';
-import { validateBody } from '../../../../shared/middlewares/validate';
-import { crearProductoSchema } from '../../../../shared/schemas/productoSchema';
+import { paramsSchema } from '../../../../shared/schemas/paramsSchema';
 import { ProductoController } from '../../controllers/productoController';
+import { crearProductoSchema } from '../../../../shared/schemas/productoSchema';
 import { PostgresProductoRepository } from '../db/PostgresProductoRepository';
+import { validateBody, validateParams } from '../../../../shared/middlewares/validate';
 import { 
   ListarProductos, 
   ListarVariantes, 
@@ -27,11 +28,11 @@ const controller = new ProductoController(
 );
 
 router.get('/', controller.getProductos);
-router.get('/:id/variantes', controller.getVariantes);
+router.get('/:id/variantes', validateParams(paramsSchema), controller.getVariantes);
 router.post('/', validateBody(crearProductoSchema),controller.create);
-router.put('/:id', controller.updateProducto);
-router.put('/:id/variantes', controller.updateVariante);
-router.delete('/:id', controller.deleteProducto);
-router.delete('/:id/variantes', controller.deleteVariante);
+router.put('/:id', validateParams(paramsSchema), controller.updateProducto);
+router.put('/:id/variantes', validateParams(paramsSchema), controller.updateVariante);
+router.delete('/:id', validateParams(paramsSchema), controller.deleteProducto);
+router.delete('/:id/variantes', validateParams(paramsSchema), controller.deleteVariante);
 
 export default router;

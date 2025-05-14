@@ -1,5 +1,5 @@
-import { ProductoDTO } from '../../application/dtos/ProductoDTO';
-import { BadRequestError, NotFoundError } from '../../../../shared/errors/AppError';
+import { ProductoDTO } from '../application/dtos/ProductoDTO';
+import { BadRequestError, NotFoundError } from '../../../shared/errors/AppError';
 import { Request, Response, NextFunction } from 'express';
 import { 
   ListarProductos, 
@@ -9,7 +9,7 @@ import {
   ActualizarVariante, 
   EliminarProducto, 
   EliminarVariante 
-} from '../../application/index';
+} from '../application/index';
 
 export class ProductoController {
   constructor(

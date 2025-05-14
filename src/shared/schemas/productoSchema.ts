@@ -18,5 +18,3 @@ export const crearProductoSchema = z.object({
   producto: productoSchema,
   variantes: z.array(varianteSchema).nonempty('Al menos una variante es requerida'),
 });
-
-export type CrearProductoDTO = z.infer<typeof crearProductoSchema>;

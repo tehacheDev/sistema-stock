@@ -1,22 +1,18 @@
-import { ClienteRepository } from '../../domain/repositories/ClienteRepository';
 import { Cliente } from '../../domain/entities/Cliente';
-
-interface InputDTO {
-  nombre: string;
-  apellido: string;
-  celular: string;
-}
+import { IClienteRepository } from '../../domain/repositories/IClienteRepository';
+import { ClienteDTO } from '../dtos/ClienteDTO';
 
 export class ActualizarCliente {
-  constructor(private readonly productoRepo: ClienteRepository) {}
+  constructor(private readonly productoRepo: IClienteRepository) {}
 
-  async actualizar(id_producto: number, data: InputDTO): Promise<void> {
+  async actualizar(id_producto: number, data: ClienteDTO): Promise<number> {
     const producto = new Cliente(
       data.nombre,
       data.apellido,
       data.celular
     );
 
-    await this.productoRepo.actualizarCliente(id_producto, producto);
+    const result = await this.productoRepo.actualizarCliente(id_producto, producto);
+    return result;
   }
 }
