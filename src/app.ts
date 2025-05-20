@@ -1,6 +1,6 @@
 import dotenv from "dotenv";
 import express from "express";
-import './shared/database/connection';
+//import './shared/database/connection';
 import * as routes from "./shared/routes/route";
 import { logRequests } from "./shared/middlewares/loggerMiddleware";
 import { NotFoundError } from "./shared/errors/AppError";
