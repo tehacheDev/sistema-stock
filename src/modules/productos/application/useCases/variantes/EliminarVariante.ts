@@ -1,5 +1,5 @@
-import { NotFoundError } from '../../../../shared/errors/AppError';
-import { IProductoRepository } from '../../domain/repositories/IProductoRepository';
+import { NotFoundError } from '../../../../../shared/errors/AppError';
+import { IProductoRepository } from '../../../domain/repositories/IProductoRepository';
 
 export class EliminarVariante {
   constructor(private readonly productoRepo: IProductoRepository) {}

@@ -7,12 +7,13 @@ import { validateBody, validateParams } from '../../../../shared/middlewares/val
 import { 
   ListarProductos, 
   ListarVariantes, 
+  ListarVariante,
   RegistrarProducto, 
   ActualizarProducto, 
   ActualizarVariante, 
   EliminarProducto, 
-  EliminarVariante 
-} from '../../application/index';
+  EliminarVariante
+} from '../../index';
 
 const router = Router();
 const repo = new PrismaProductoRepository();
@@ -20,15 +21,17 @@ const repo = new PrismaProductoRepository();
 const controller = new ProductoController(
   new ListarProductos(repo),
   new ListarVariantes(repo),
+  new ListarVariante(repo),
   new RegistrarProducto(repo),
   new ActualizarProducto(repo),
   new ActualizarVariante(repo),
   new EliminarProducto(repo),
-  new EliminarVariante(repo),
+  new EliminarVariante(repo)
 );
 
 router.get('/', controller.getProductos);
 router.get('/:id/variantes', validateParams(paramsSchema), controller.getVariantes);
+router.get('/:id/variante', validateBody(paramsSchema), controller.getVariante);
 router.post('/', validateBody(crearProductoSchema),controller.create);
 router.put('/:id', validateParams(paramsSchema), controller.updateProducto);
 router.put('/:id/variantes', validateParams(paramsSchema), controller.updateVariante);

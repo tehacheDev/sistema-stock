@@ -46,7 +46,7 @@ model detalle_compra {
 }
 
 model detalle_venta {
-  id_detalle_venta   Int              @id
+  id_detalle_venta   Int              @id @default(autoincrement())
   id_operacion_venta Int
   id_producto        Int
   cantidad           Int
@@ -67,7 +67,7 @@ model inventario_movimientos {
 }
 
 model operacion {
-  id_operacion           Int                      @id
+  id_operacion           Int                      @id @default(autoincrement())
   id_tipo_operacion      Int
   estado                 String                   @db.Char(50)
   asientos_contables     asientos_contables[]
@@ -100,7 +100,7 @@ model operacion_gastos {
 }
 
 model operacion_ventas {
-  id_operacion_ventas Int              @id
+  id_operacion_ventas Int              @id @default(autoincrement())
   id_operacion        Int
   id_cliente          Int
   fecha               DateTime         @db.Date

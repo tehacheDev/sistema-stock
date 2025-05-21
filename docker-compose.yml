@@ -1,12 +1,9 @@
-
 services:
   db:
     image: postgres:latest
     container_name: mi-postgres
-    environment:
-      POSTGRES_USER: th
-      POSTGRES_PASSWORD: solythomi777
-      POSTGRES_DB: stuky
+    env_file:
+      - .env.db
     ports:
       - "5432:5432"
     volumes:
@@ -16,7 +13,7 @@ services:
     build: .
     container_name: stuky-api
     env_file:
-      - .env
+      - .env.api
     depends_on:
       - db
     ports:
@@ -24,20 +21,12 @@ services:
     volumes:
       - .:/usr/src/app
     command: npm run dev
-    environment:
-      - NODE_ENV=development
-      - DB_HOST=db
-      - DB_PORT=5432
-      - DB_USER=th
-      - DB_PASSWORD=solythomi777
-      - DB_NAME=stuky
 
   pgadmin:
     image: dpage/pgadmin4
     container_name: pgadmin
-    environment:
-      PGADMIN_DEFAULT_EMAIL: admin@admin.com
-      PGADMIN_DEFAULT_PASSWORD: admin
+    env_file:
+      - .env.pgadmin
     ports:
       - "5050:80"
     depends_on:

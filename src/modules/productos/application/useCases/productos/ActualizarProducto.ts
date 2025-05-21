@@ -1,7 +1,7 @@
-import { Producto } from '../../domain/entities/Producto';
-import { ProductoDTO } from '../../application/dtos/ProductoDTO';
-import { NotFoundError } from '../../../../shared/errors/AppError';
-import { IProductoRepository } from '../../domain/repositories/IProductoRepository';
+import { Producto } from '../../../domain/entities/Producto';
+import { ProductoDTO } from '../../../application/dtos/ProductoDTO';
+import { NotFoundError } from '../../../../../shared/errors/AppError';
+import { IProductoRepository } from '../../../domain/repositories/IProductoRepository';
 
 export class ActualizarProducto {
   constructor(private readonly productoRepo: IProductoRepository) {}

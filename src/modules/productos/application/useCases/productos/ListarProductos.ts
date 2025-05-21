@@ -1,5 +1,5 @@
-import { IProductoRepository } from '../../domain/repositories/IProductoRepository';
-import { Producto } from '../../domain/entities/Producto';
+import { IProductoRepository } from '../../../domain/repositories/IProductoRepository';
+import { Producto } from '../../../domain/entities/Producto';
 
 export class ListarProductos {
   constructor(private readonly productoRepo: IProductoRepository) {}

@@ -1,4 +1,5 @@
 import { PrismaClient } from '../../../../generated/prisma/client';
+import { NotFoundError } from '../../../../shared/errors/AppError';
 import { Producto } from '../../domain/entities/Producto';
 import { Variante } from '../../domain/entities/Variante';
 import { IProductoRepository } from '../../domain/repositories/IProductoRepository';
@@ -38,6 +39,14 @@ export class PrismaProductoRepository implements IProductoRepository {
       where: { id_producto: id },
     });
     return variantes.map(Variante.fromRow);
+  }
+
+  async listarVariante(id: number): Promise<Variante> {
+    const variante = await prisma.producto_variantes.findFirst({
+      where: { id_producto: id }
+    });
+    if (!variante) throw new NotFoundError('Variante no encontrada');
+    return Variante.fromRow(variante);
   }
 
   async actualizarProducto(id: number, producto: Producto): Promise<number> {
@@ -84,5 +93,16 @@ export class PrismaProductoRepository implements IProductoRepository {
       where: { id_variante: id },
     });
     return !!deleted;
+  }
+
+  async restarStock(id_producto: number, cantidad: number): Promise<void> {
+    await prisma.producto_variantes.updateMany({
+      where: { id_producto },
+      data: {
+        stock_actual: {
+          decrement: cantidad,
+        },
+      },
+    });
   }
 }

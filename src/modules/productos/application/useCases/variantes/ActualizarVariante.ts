@@ -1,7 +1,7 @@
-import { Variante } from '../../domain/entities/Variante';
-import { VarianteDTO } from '../dtos/VarianteDTO';
-import { NotFoundError } from '../../../../shared/errors/AppError';
-import { IProductoRepository } from '../../domain/repositories/IProductoRepository';
+import { Variante } from '../../../domain/entities/Variante';
+import { VarianteDTO } from '../../dtos/VarianteDTO';
+import { NotFoundError } from '../../../../../shared/errors/AppError';
+import { IProductoRepository } from '../../../domain/repositories/IProductoRepository';
 
 export class ActualizarVariante {
   constructor(private readonly productoRepo: IProductoRepository) {}

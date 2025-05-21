@@ -4,17 +4,19 @@ import { Request, Response, NextFunction } from 'express';
 import { 
   ListarProductos, 
   ListarVariantes, 
+  ListarVariante,
   RegistrarProducto, 
   ActualizarProducto, 
   ActualizarVariante, 
   EliminarProducto, 
-  EliminarVariante 
-} from '../application/index';
+  EliminarVariante, 
+} from '../index';
 
 export class ProductoController {
   constructor(
     private readonly listarProductos: ListarProductos,
     private readonly listarVariantes: ListarVariantes,
+    private readonly listarVariante: ListarVariante,
     private readonly registrarProducto: RegistrarProducto,
     private readonly actualizarProducto: ActualizarProducto,
     private readonly actualizarVariante: ActualizarVariante,
@@ -36,8 +38,20 @@ export class ProductoController {
       const id = parseInt(req.params.id, 10);
       if (isNaN(id)) throw new BadRequestError('ID inválido');
       const variantes = await this.listarVariantes.listarVariantes(id);
-      if (!variantes) throw new NotFoundError('Variante no encontrado');
+      if (!variantes) throw new NotFoundError('Variantes no encontrados');
       res.json(variantes);
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  getVariante = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const id = parseInt(req.params.id, 10);
+      if (isNaN(id)) throw new BadRequestError('ID inválido');
+      const variante = await this.listarVariante.listarVariante(id);
+      if (!variante) throw new NotFoundError('Variante no encontrado');
+      res.json(variante);
     } catch (error) {
       next(error);
     }

@@ -1,5 +1,6 @@
 import { Application } from "express";
-import productoRoutes from '../../modules/productos/infrastructure/routes/productoRoutes';
+import { productoRoutes } from '../../modules/productos/index';
+import { ventasRoute } from '../../modules/ventas/index'
 import clientesRoutes from '../../modules/clientes/infrastructure/routes/ClienteRoute';
 
 export const register = async (app: Application) => {
@@ -7,5 +8,5 @@ export const register = async (app: Application) => {
 
     app.use(`${url}/productos`, productoRoutes);
     app.use(`${url}/clientes`, clientesRoutes);
-
+    app.use(`${url}/ventas`, ventasRoute);
 };

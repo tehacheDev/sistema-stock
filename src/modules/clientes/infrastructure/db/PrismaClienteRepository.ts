@@ -1,4 +1,5 @@
 import { PrismaClient } from '../../../../generated/prisma/client'
+import { NotFoundError } from '../../../../shared/errors/AppError';
 import { ClienteDTO } from '../../application/dtos/ClienteDTO';
 import { Cliente } from '../../domain/entities/Cliente';
 import { IClienteRepository } from '../../domain/repositories/IClienteRepository';
@@ -23,7 +24,7 @@ export class PrismaClienteRepository implements IClienteRepository {
 
   async obtenerClientePorId(id: number): Promise<ClienteDTO> {
     const cliente = await prisma.clientes.findUnique({ where: { id_cliente: id } });
-    if (!cliente) throw new Error('Cliente no encontrado');
+    if (!cliente) throw new NotFoundError('Cliente no encontrado');
     return new Cliente(cliente.nombre, cliente.apellido, cliente.celular ?? '', cliente.id_cliente);
   }
 

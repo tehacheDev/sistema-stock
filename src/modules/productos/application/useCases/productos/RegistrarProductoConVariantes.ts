@@ -1,7 +1,7 @@
-import { Producto } from '../../domain/entities/Producto';
-import { IProductoRepository } from '../../domain/repositories/IProductoRepository';
-import { ProductoDTO } from '../dtos/ProductoDTO';
-import { VarianteDTO } from '../dtos/VarianteDTO';
+import { Producto } from '../../../domain/entities/Producto';
+import { IProductoRepository } from '../../../domain/repositories/IProductoRepository';
+import { ProductoDTO } from '../../dtos/ProductoDTO';
+import { VarianteDTO } from '../../dtos/VarianteDTO';
 
 
 export class RegistrarProducto {

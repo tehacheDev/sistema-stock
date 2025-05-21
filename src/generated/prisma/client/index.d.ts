@@ -421,7 +421,7 @@ export namespace Prisma {
   export import Exact = $Public.Exact
 
   /**
-   * Prisma Client JS version: 6.8.1
+   * Prisma Client JS version: 6.8.2
    * Query Engine version: 2060c79ba17c6bb9f5823312b6f6b7f4a845738e
    */
   export type PrismaVersion = {
@@ -20684,7 +20684,6 @@ export namespace Prisma {
   }
 
   export type detalle_ventaCreateInput = {
-    id_detalle_venta: number
     cantidad: number
     precio_unitario: number
     operacion_ventas: operacion_ventasCreateNestedOneWithoutDetalle_ventaInput
@@ -20692,7 +20691,7 @@ export namespace Prisma {
   }
 
   export type detalle_ventaUncheckedCreateInput = {
-    id_detalle_venta: number
+    id_detalle_venta?: number
     id_operacion_venta: number
     id_producto: number
     cantidad: number
@@ -20700,7 +20699,6 @@ export namespace Prisma {
   }
 
   export type detalle_ventaUpdateInput = {
-    id_detalle_venta?: IntFieldUpdateOperationsInput | number
     cantidad?: IntFieldUpdateOperationsInput | number
     precio_unitario?: FloatFieldUpdateOperationsInput | number
     operacion_ventas?: operacion_ventasUpdateOneRequiredWithoutDetalle_ventaNestedInput
@@ -20716,7 +20714,7 @@ export namespace Prisma {
   }
 
   export type detalle_ventaCreateManyInput = {
-    id_detalle_venta: number
+    id_detalle_venta?: number
     id_operacion_venta: number
     id_producto: number
     cantidad: number
@@ -20724,7 +20722,6 @@ export namespace Prisma {
   }
 
   export type detalle_ventaUpdateManyMutationInput = {
-    id_detalle_venta?: IntFieldUpdateOperationsInput | number
     cantidad?: IntFieldUpdateOperationsInput | number
     precio_unitario?: FloatFieldUpdateOperationsInput | number
   }
@@ -20799,7 +20796,6 @@ export namespace Prisma {
   }
 
   export type operacionCreateInput = {
-    id_operacion: number
     estado: string
     asientos_contables?: asientos_contablesCreateNestedManyWithoutOperacionInput
     inventario_movimientos?: inventario_movimientosCreateNestedManyWithoutOperacionInput
@@ -20810,7 +20806,7 @@ export namespace Prisma {
   }
 
   export type operacionUncheckedCreateInput = {
-    id_operacion: number
+    id_operacion?: number
     id_tipo_operacion: number
     estado: string
     asientos_contables?: asientos_contablesUncheckedCreateNestedManyWithoutOperacionInput
@@ -20821,7 +20817,6 @@ export namespace Prisma {
   }
 
   export type operacionUpdateInput = {
-    id_operacion?: IntFieldUpdateOperationsInput | number
     estado?: StringFieldUpdateOperationsInput | string
     asientos_contables?: asientos_contablesUpdateManyWithoutOperacionNestedInput
     inventario_movimientos?: inventario_movimientosUpdateManyWithoutOperacionNestedInput
@@ -20843,13 +20838,12 @@ export namespace Prisma {
   }
 
   export type operacionCreateManyInput = {
-    id_operacion: number
+    id_operacion?: number
     id_tipo_operacion: number
     estado: string
   }
 
   export type operacionUpdateManyMutationInput = {
-    id_operacion?: IntFieldUpdateOperationsInput | number
     estado?: StringFieldUpdateOperationsInput | string
   }
 
@@ -20980,7 +20974,6 @@ export namespace Prisma {
   }
 
   export type operacion_ventasCreateInput = {
-    id_operacion_ventas: number
     fecha: Date | string
     total: number
     metodo_pago: string
@@ -20991,7 +20984,7 @@ export namespace Prisma {
   }
 
   export type operacion_ventasUncheckedCreateInput = {
-    id_operacion_ventas: number
+    id_operacion_ventas?: number
     id_operacion: number
     id_cliente: number
     fecha: Date | string
@@ -21002,7 +20995,6 @@ export namespace Prisma {
   }
 
   export type operacion_ventasUpdateInput = {
-    id_operacion_ventas?: IntFieldUpdateOperationsInput | number
     fecha?: DateTimeFieldUpdateOperationsInput | Date | string
     total?: FloatFieldUpdateOperationsInput | number
     metodo_pago?: StringFieldUpdateOperationsInput | string
@@ -21024,7 +21016,7 @@ export namespace Prisma {
   }
 
   export type operacion_ventasCreateManyInput = {
-    id_operacion_ventas: number
+    id_operacion_ventas?: number
     id_operacion: number
     id_cliente: number
     fecha: Date | string
@@ -21033,7 +21025,6 @@ export namespace Prisma {
   }
 
   export type operacion_ventasUpdateManyMutationInput = {
-    id_operacion_ventas?: IntFieldUpdateOperationsInput | number
     fecha?: DateTimeFieldUpdateOperationsInput | Date | string
     total?: FloatFieldUpdateOperationsInput | number
     metodo_pago?: StringFieldUpdateOperationsInput | string
@@ -23348,7 +23339,6 @@ export namespace Prisma {
   }
 
   export type operacionCreateWithoutAsientos_contablesInput = {
-    id_operacion: number
     estado: string
     inventario_movimientos?: inventario_movimientosCreateNestedManyWithoutOperacionInput
     tipo_operacion: tipo_operacionCreateNestedOneWithoutOperacionInput
@@ -23358,7 +23348,7 @@ export namespace Prisma {
   }
 
   export type operacionUncheckedCreateWithoutAsientos_contablesInput = {
-    id_operacion: number
+    id_operacion?: number
     id_tipo_operacion: number
     estado: string
     inventario_movimientos?: inventario_movimientosUncheckedCreateNestedManyWithoutOperacionInput
@@ -23411,7 +23401,6 @@ export namespace Prisma {
   }
 
   export type operacionUpdateWithoutAsientos_contablesInput = {
-    id_operacion?: IntFieldUpdateOperationsInput | number
     estado?: StringFieldUpdateOperationsInput | string
     inventario_movimientos?: inventario_movimientosUpdateManyWithoutOperacionNestedInput
     tipo_operacion?: tipo_operacionUpdateOneRequiredWithoutOperacionNestedInput
@@ -23431,7 +23420,6 @@ export namespace Prisma {
   }
 
   export type operacion_ventasCreateWithoutClientesInput = {
-    id_operacion_ventas: number
     fecha: Date | string
     total: number
     metodo_pago: string
@@ -23441,7 +23429,7 @@ export namespace Prisma {
   }
 
   export type operacion_ventasUncheckedCreateWithoutClientesInput = {
-    id_operacion_ventas: number
+    id_operacion_ventas?: number
     id_operacion: number
     fecha: Date | string
     total: number
@@ -23599,7 +23587,6 @@ export namespace Prisma {
   }
 
   export type operacion_ventasCreateWithoutDetalle_ventaInput = {
-    id_operacion_ventas: number
     fecha: Date | string
     total: number
     metodo_pago: string
@@ -23609,7 +23596,7 @@ export namespace Prisma {
   }
 
   export type operacion_ventasUncheckedCreateWithoutDetalle_ventaInput = {
-    id_operacion_ventas: number
+    id_operacion_ventas?: number
     id_operacion: number
     id_cliente: number
     fecha: Date | string
@@ -23661,7 +23648,6 @@ export namespace Prisma {
   }
 
   export type operacion_ventasUpdateWithoutDetalle_ventaInput = {
-    id_operacion_ventas?: IntFieldUpdateOperationsInput | number
     fecha?: DateTimeFieldUpdateOperationsInput | Date | string
     total?: FloatFieldUpdateOperationsInput | number
     metodo_pago?: StringFieldUpdateOperationsInput | string
@@ -23713,7 +23699,6 @@ export namespace Prisma {
   }
 
   export type operacionCreateWithoutInventario_movimientosInput = {
-    id_operacion: number
     estado: string
     asientos_contables?: asientos_contablesCreateNestedManyWithoutOperacionInput
     tipo_operacion: tipo_operacionCreateNestedOneWithoutOperacionInput
@@ -23723,7 +23708,7 @@ export namespace Prisma {
   }
 
   export type operacionUncheckedCreateWithoutInventario_movimientosInput = {
-    id_operacion: number
+    id_operacion?: number
     id_tipo_operacion: number
     estado: string
     asientos_contables?: asientos_contablesUncheckedCreateNestedManyWithoutOperacionInput
@@ -23775,7 +23760,6 @@ export namespace Prisma {
   }
 
   export type operacionUpdateWithoutInventario_movimientosInput = {
-    id_operacion?: IntFieldUpdateOperationsInput | number
     estado?: StringFieldUpdateOperationsInput | string
     asientos_contables?: asientos_contablesUpdateManyWithoutOperacionNestedInput
     tipo_operacion?: tipo_operacionUpdateOneRequiredWithoutOperacionNestedInput
@@ -23944,7 +23928,6 @@ export namespace Prisma {
   }
 
   export type operacion_ventasCreateWithoutOperacionInput = {
-    id_operacion_ventas: number
     fecha: Date | string
     total: number
     metodo_pago: string
@@ -23954,7 +23937,7 @@ export namespace Prisma {
   }
 
   export type operacion_ventasUncheckedCreateWithoutOperacionInput = {
-    id_operacion_ventas: number
+    id_operacion_ventas?: number
     id_cliente: number
     fecha: Date | string
     total: number
@@ -24144,7 +24127,6 @@ export namespace Prisma {
   }
 
   export type operacionCreateWithoutOperacion_comprasInput = {
-    id_operacion: number
     estado: string
     asientos_contables?: asientos_contablesCreateNestedManyWithoutOperacionInput
     inventario_movimientos?: inventario_movimientosCreateNestedManyWithoutOperacionInput
@@ -24154,7 +24136,7 @@ export namespace Prisma {
   }
 
   export type operacionUncheckedCreateWithoutOperacion_comprasInput = {
-    id_operacion: number
+    id_operacion?: number
     id_tipo_operacion: number
     estado: string
     asientos_contables?: asientos_contablesUncheckedCreateNestedManyWithoutOperacionInput
@@ -24226,7 +24208,6 @@ export namespace Prisma {
   }
 
   export type operacionUpdateWithoutOperacion_comprasInput = {
-    id_operacion?: IntFieldUpdateOperationsInput | number
     estado?: StringFieldUpdateOperationsInput | string
     asientos_contables?: asientos_contablesUpdateManyWithoutOperacionNestedInput
     inventario_movimientos?: inventario_movimientosUpdateManyWithoutOperacionNestedInput
@@ -24271,7 +24252,6 @@ export namespace Prisma {
   }
 
   export type operacionCreateWithoutOperacion_gastosInput = {
-    id_operacion: number
     estado: string
     asientos_contables?: asientos_contablesCreateNestedManyWithoutOperacionInput
     inventario_movimientos?: inventario_movimientosCreateNestedManyWithoutOperacionInput
@@ -24281,7 +24261,7 @@ export namespace Prisma {
   }
 
   export type operacionUncheckedCreateWithoutOperacion_gastosInput = {
-    id_operacion: number
+    id_operacion?: number
     id_tipo_operacion: number
     estado: string
     asientos_contables?: asientos_contablesUncheckedCreateNestedManyWithoutOperacionInput
@@ -24307,7 +24287,6 @@ export namespace Prisma {
   }
 
   export type operacionUpdateWithoutOperacion_gastosInput = {
-    id_operacion?: IntFieldUpdateOperationsInput | number
     estado?: StringFieldUpdateOperationsInput | string
     asientos_contables?: asientos_contablesUpdateManyWithoutOperacionNestedInput
     inventario_movimientos?: inventario_movimientosUpdateManyWithoutOperacionNestedInput
@@ -24327,14 +24306,13 @@ export namespace Prisma {
   }
 
   export type detalle_ventaCreateWithoutOperacion_ventasInput = {
-    id_detalle_venta: number
     cantidad: number
     precio_unitario: number
     productos: productosCreateNestedOneWithoutDetalle_ventaInput
   }
 
   export type detalle_ventaUncheckedCreateWithoutOperacion_ventasInput = {
-    id_detalle_venta: number
+    id_detalle_venta?: number
     id_producto: number
     cantidad: number
     precio_unitario: number
@@ -24369,7 +24347,6 @@ export namespace Prisma {
   }
 
   export type operacionCreateWithoutOperacion_ventasInput = {
-    id_operacion: number
     estado: string
     asientos_contables?: asientos_contablesCreateNestedManyWithoutOperacionInput
     inventario_movimientos?: inventario_movimientosCreateNestedManyWithoutOperacionInput
@@ -24379,7 +24356,7 @@ export namespace Prisma {
   }
 
   export type operacionUncheckedCreateWithoutOperacion_ventasInput = {
-    id_operacion: number
+    id_operacion?: number
     id_tipo_operacion: number
     estado: string
     asientos_contables?: asientos_contablesUncheckedCreateNestedManyWithoutOperacionInput
@@ -24480,7 +24457,6 @@ export namespace Prisma {
   }
 
   export type operacionUpdateWithoutOperacion_ventasInput = {
-    id_operacion?: IntFieldUpdateOperationsInput | number
     estado?: StringFieldUpdateOperationsInput | string
     asientos_contables?: asientos_contablesUpdateManyWithoutOperacionNestedInput
     inventario_movimientos?: inventario_movimientosUpdateManyWithoutOperacionNestedInput
@@ -24527,7 +24503,6 @@ export namespace Prisma {
   }
 
   export type operacion_ventasCreateWithoutPagos_clientesInput = {
-    id_operacion_ventas: number
     fecha: Date | string
     total: number
     metodo_pago: string
@@ -24537,7 +24512,7 @@ export namespace Prisma {
   }
 
   export type operacion_ventasUncheckedCreateWithoutPagos_clientesInput = {
-    id_operacion_ventas: number
+    id_operacion_ventas?: number
     id_operacion: number
     id_cliente: number
     fecha: Date | string
@@ -24563,7 +24538,6 @@ export namespace Prisma {
   }
 
   export type operacion_ventasUpdateWithoutPagos_clientesInput = {
-    id_operacion_ventas?: IntFieldUpdateOperationsInput | number
     fecha?: DateTimeFieldUpdateOperationsInput | Date | string
     total?: FloatFieldUpdateOperationsInput | number
     metodo_pago?: StringFieldUpdateOperationsInput | string
@@ -24665,14 +24639,13 @@ export namespace Prisma {
   }
 
   export type detalle_ventaCreateWithoutProductosInput = {
-    id_detalle_venta: number
     cantidad: number
     precio_unitario: number
     operacion_ventas: operacion_ventasCreateNestedOneWithoutDetalle_ventaInput
   }
 
   export type detalle_ventaUncheckedCreateWithoutProductosInput = {
-    id_detalle_venta: number
+    id_detalle_venta?: number
     id_operacion_venta: number
     cantidad: number
     precio_unitario: number
@@ -24857,7 +24830,6 @@ export namespace Prisma {
   }
 
   export type operacionCreateWithoutTipo_operacionInput = {
-    id_operacion: number
     estado: string
     asientos_contables?: asientos_contablesCreateNestedManyWithoutOperacionInput
     inventario_movimientos?: inventario_movimientosCreateNestedManyWithoutOperacionInput
@@ -24867,7 +24839,7 @@ export namespace Prisma {
   }
 
   export type operacionUncheckedCreateWithoutTipo_operacionInput = {
-    id_operacion: number
+    id_operacion?: number
     estado: string
     asientos_contables?: asientos_contablesUncheckedCreateNestedManyWithoutOperacionInput
     inventario_movimientos?: inventario_movimientosUncheckedCreateNestedManyWithoutOperacionInput
@@ -24940,7 +24912,7 @@ export namespace Prisma {
   }
 
   export type operacion_ventasCreateManyClientesInput = {
-    id_operacion_ventas: number
+    id_operacion_ventas?: number
     id_operacion: number
     fecha: Date | string
     total: number
@@ -24948,7 +24920,6 @@ export namespace Prisma {
   }
 
   export type operacion_ventasUpdateWithoutClientesInput = {
-    id_operacion_ventas?: IntFieldUpdateOperationsInput | number
     fecha?: DateTimeFieldUpdateOperationsInput | Date | string
     total?: FloatFieldUpdateOperationsInput | number
     metodo_pago?: StringFieldUpdateOperationsInput | string
@@ -25005,7 +24976,7 @@ export namespace Prisma {
   }
 
   export type operacion_ventasCreateManyOperacionInput = {
-    id_operacion_ventas: number
+    id_operacion_ventas?: number
     id_cliente: number
     fecha: Date | string
     total: number
@@ -25104,7 +25075,6 @@ export namespace Prisma {
   }
 
   export type operacion_ventasUpdateWithoutOperacionInput = {
-    id_operacion_ventas?: IntFieldUpdateOperationsInput | number
     fecha?: DateTimeFieldUpdateOperationsInput | Date | string
     total?: FloatFieldUpdateOperationsInput | number
     metodo_pago?: StringFieldUpdateOperationsInput | string
@@ -25160,7 +25130,7 @@ export namespace Prisma {
   }
 
   export type detalle_ventaCreateManyOperacion_ventasInput = {
-    id_detalle_venta: number
+    id_detalle_venta?: number
     id_producto: number
     cantidad: number
     precio_unitario: number
@@ -25174,7 +25144,6 @@ export namespace Prisma {
   }
 
   export type detalle_ventaUpdateWithoutOperacion_ventasInput = {
-    id_detalle_venta?: IntFieldUpdateOperationsInput | number
     cantidad?: IntFieldUpdateOperationsInput | number
     precio_unitario?: FloatFieldUpdateOperationsInput | number
     productos?: productosUpdateOneRequiredWithoutDetalle_ventaNestedInput
@@ -25223,7 +25192,7 @@ export namespace Prisma {
   }
 
   export type detalle_ventaCreateManyProductosInput = {
-    id_detalle_venta: number
+    id_detalle_venta?: number
     id_operacion_venta: number
     cantidad: number
     precio_unitario: number
@@ -25266,7 +25235,6 @@ export namespace Prisma {
   }
 
   export type detalle_ventaUpdateWithoutProductosInput = {
-    id_detalle_venta?: IntFieldUpdateOperationsInput | number
     cantidad?: IntFieldUpdateOperationsInput | number
     precio_unitario?: FloatFieldUpdateOperationsInput | number
     operacion_ventas?: operacion_ventasUpdateOneRequiredWithoutDetalle_ventaNestedInput
@@ -25365,12 +25333,11 @@ export namespace Prisma {
   }
 
   export type operacionCreateManyTipo_operacionInput = {
-    id_operacion: number
+    id_operacion?: number
     estado: string
   }
 
   export type operacionUpdateWithoutTipo_operacionInput = {
-    id_operacion?: IntFieldUpdateOperationsInput | number
     estado?: StringFieldUpdateOperationsInput | string
     asientos_contables?: asientos_contablesUpdateManyWithoutOperacionNestedInput
     inventario_movimientos?: inventario_movimientosUpdateManyWithoutOperacionNestedInput
