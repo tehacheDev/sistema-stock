@@ -1,10 +1,10 @@
-import { PrismaClient } from '../../../../generated/prisma/client';
+import { getPrismaClient } from '../../../../shared/db/prisma';
 import { NotFoundError } from '../../../../shared/errors/AppError';
 import { Producto } from '../../domain/entities/Producto';
 import { Variante } from '../../domain/entities/Variante';
 import { IProductoRepository } from '../../domain/repositories/IProductoRepository';
 
-const prisma = new PrismaClient();
+const prisma = getPrismaClient();
 
 export class PrismaProductoRepository implements IProductoRepository {
 

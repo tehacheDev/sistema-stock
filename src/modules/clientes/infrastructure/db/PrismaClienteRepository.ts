@@ -1,9 +1,10 @@
-import { PrismaClient } from '../../../../generated/prisma/client'
+import { getPrismaClient } from '../../../../shared/db/prisma';
 import { NotFoundError } from '../../../../shared/errors/AppError';
 import { ClienteDTO } from '../../application/dtos/ClienteDTO';
 import { Cliente } from '../../domain/entities/Cliente';
 import { IClienteRepository } from '../../domain/repositories/IClienteRepository';
-const prisma = new PrismaClient()
+
+const prisma = getPrismaClient();
 
 export class PrismaClienteRepository implements IClienteRepository {
   async crearCliente(cliente: ClienteDTO): Promise<number> {

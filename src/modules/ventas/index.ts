@@ -1,7 +1,14 @@
 // Application
+// Use Cases
+// Ventas
 export { ListarVentas } from './application/usecases/ventas/listarVentas';
+export { ListarVenta } from './application/usecases/ventas/listarVenta';
 export { CrearVenta } from './application/usecases/ventas/crearVenta';
+export { EliminarVenta } from './application/usecases/ventas/eliminarVenta';
+// Detalles
+export { ListarDetalles } from './application/usecases/detalles/listarDetalles';
 
+//dtos
 export * from './application/dtos/VentaDTO';
 export * from './application/dtos/DetalleVentaDTO';
 
