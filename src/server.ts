@@ -20,5 +20,5 @@ process.on('SIGTERM', () => gracefulShutdown('SIGTERM'));
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
-  logger.info(`Servidor corriendo en http://localhost:${PORT}`);
+  logger.info(`Servidor corriendo en puerto ${PORT}`);
 });

@@ -11,7 +11,7 @@ export * from './domain/repositories/IClienteRepository';
 // Infrastructure
 export * from './infrastructure/db/PrismaClienteRepository';
 // Routes
-export { default as clienteRoutes } from './infrastructure/routes/clienteRoute';
+export { default as clienteRoutes } from './infrastructure/routes/ClienteRoute';
 
 // Controllers
 export * from './infrastructure/controllers/clientesController';

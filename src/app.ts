@@ -1,6 +1,5 @@
 import dotenv from "dotenv";
 import express from "express";
-//import './shared/database/connection';
 import * as routes from "./shared/routes/route";
 import { logRequests } from "./shared/middlewares/loggerMiddleware";
 import { NotFoundError } from "./shared/errors/AppError";
@@ -24,7 +23,7 @@ app.use((req, res, next) => {
 });
 // Middleware para rutas no encontradas
 app.use((req, res, next) => {
-  next(new NotFoundError());
+  next(new NotFoundError('La ruta solicitada no existe'));
 });
 
 // Middleware global de errores (siempre el último)
