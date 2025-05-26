@@ -1,15 +1,15 @@
-import { Producto } from '../../domain/entities/Producto';
-import { ProductoDTO } from '../../application/dtos/ProductoDTO';
-import { NotFoundError } from '../../../../shared/errors/AppError';
-import { IProductoRepository } from '../../domain/repositories/IProductoRepository';
+import { Producto } from '../../../domain/entities/Producto';
+import { ProductoDTO } from '../../dtos/ProductoDTO';
+import { NotFoundError } from '../../../../../shared/errors/AppError';
+import { IProductoRepository } from '../../../domain/repositories/IProductoRepository';
 
 export class ActualizarProducto {
   constructor(private readonly productoRepo: IProductoRepository) {}
 
-  async actualizarProducto(id_producto: number, data: ProductoDTO): Promise<number> {
+  async ejecutar(id_producto: number, data: ProductoDTO): Promise<number> {
     const producto = new Producto(
+      data.id_categoria,
       data.nombre,
-      data.categoria,
       data.costo,
       data.precio_unitario
     );

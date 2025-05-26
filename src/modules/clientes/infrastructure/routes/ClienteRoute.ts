@@ -2,14 +2,14 @@ import { Router } from 'express';
 import { validateBody, validateParams } from '../../../../shared/middlewares/validate';
 import { clienteSchema } from '../../../../shared/schemas/clienteSchema';
 import { PrismaClienteRepository } from '../db/PrismaClienteRepository';
-import { ClienteController } from '../../controllers/clientesController';
+import { ClienteController } from '../controllers/clientesController';
 import { 
   ListarCliente, 
-  ObtenerClientePorId, 
-  RegistrarCliente, 
+  ListarClientePorId, 
+  CrearCliente, 
   ActualizarCliente, 
   EliminarCliente 
-} from '../../application/Index';
+} from '../../index';
 import { paramsSchema } from '../../../../shared/schemas/paramsSchema';
 
 const router = Router();
@@ -17,8 +17,8 @@ const repo = new PrismaClienteRepository();
 
 const controller = new ClienteController(
   new ListarCliente(repo),
-  new ObtenerClientePorId(repo),
-  new RegistrarCliente(repo),
+  new ListarClientePorId(repo),
+  new CrearCliente(repo),
   new ActualizarCliente(repo),
   new EliminarCliente(repo)
 );

@@ -20,10 +20,13 @@ Thumbs.db
 *.wmv
 
 #env
-.env
+.env*
 .production.env
 .local.env
 .development.env
 .stage.env
 .qa.env
 .test.env
+
+#prisma 
+/src/generated/
