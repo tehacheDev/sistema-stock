@@ -1,13 +1,12 @@
-import { VentaDTO } from '../application/dtos/VentaDTO';
-import { BadRequestError, NotFoundError } from '../../../shared/errors/AppError';
+import { BadRequestError, NotFoundError } from '../../../../shared/errors/AppError';
 import { Request, Response, NextFunction } from 'express';
 import { 
     ListarVentas,
     ListarVenta,
     ListarDetalles,
     CrearVenta,
-    EliminarVenta
-} from '../index';
+    EliminarVenta,
+} from '../../index';
 
 export class VentaController {
     constructor(

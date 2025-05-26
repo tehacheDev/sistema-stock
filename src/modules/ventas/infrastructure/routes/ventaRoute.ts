@@ -1,7 +1,7 @@
 import { Router } from 'express';
-import { VentaController } from '../../controllers/ventaController';
-import { PrismaVentaRepository } from '../db/PrismaVentaRepository';
+import { VentaController } from '../../infrastructure/controllers/ventaController';
 import { PrismaProductoRepository } from '../../../productos/index';
+import { PrismaMovimientoRepository } from '../../../movimientos';
 import { validateBody } from '../../../../shared/middlewares/validate';
 import { paramsSchema } from '../../../../shared/schemas/paramsSchema';
 import { crearVentaSchema } from '../../../../shared/schemas/ventaSchema';
@@ -11,6 +11,7 @@ import {
     ListarDetalles,
     CrearVenta, 
     EliminarVenta,
+    PrismaVentaRepository
 } from '../../index';
 
 const router = Router();
@@ -18,13 +19,14 @@ const router = Router();
 // Repositorios
 const ventaRepository = new PrismaVentaRepository();
 const productoRepository = new PrismaProductoRepository();
+const movimientoRepository = new PrismaMovimientoRepository();
 
 
 const controller = new VentaController(
     new ListarVentas(ventaRepository),
     new ListarVenta(ventaRepository),
     new ListarDetalles(ventaRepository),
-    new CrearVenta(ventaRepository, productoRepository),
+    new CrearVenta(ventaRepository, productoRepository, movimientoRepository),
     new EliminarVenta(ventaRepository)
 );
 

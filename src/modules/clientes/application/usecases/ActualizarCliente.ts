@@ -5,7 +5,7 @@ import { ClienteDTO } from '../dtos/ClienteDTO';
 export class ActualizarCliente {
   constructor(private readonly productoRepo: IClienteRepository) {}
 
-  async actualizar(id_producto: number, data: ClienteDTO): Promise<number> {
+  async ejecutar(id_producto: number, data: ClienteDTO): Promise<number> {
     const producto = new Cliente(
       data.nombre,
       data.apellido,

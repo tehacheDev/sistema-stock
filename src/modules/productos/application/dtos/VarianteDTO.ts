@@ -1,7 +1,7 @@
 export interface VarianteDTO {
     id_producto: number;
     talle: string;
-    stock_actual: number;
     color: string;
-    id_variante?: number;
+    stock: number;
+    id_producto_variante?: number;
 }

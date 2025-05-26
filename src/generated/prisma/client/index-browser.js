@@ -120,119 +120,88 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
   Serializable: 'Serializable'
 });
 
-exports.Prisma.Asiento_detallesScalarFieldEnum = {
-  id_detalle: 'id_detalle',
-  id_asiento: 'id_asiento',
-  cuenta: 'cuenta',
-  debe: 'debe',
-  haber: 'haber'
+exports.Prisma.Categoria_productoScalarFieldEnum = {
+  id_categoria_producto: 'id_categoria_producto',
+  nombre: 'nombre'
 };
 
-exports.Prisma.Asientos_contablesScalarFieldEnum = {
-  id_asiento: 'id_asiento',
-  id_operacion: 'id_operacion',
-  fecha: 'fecha',
-  descripcion: 'descripcion'
-};
-
-exports.Prisma.ClientesScalarFieldEnum = {
+exports.Prisma.ClienteScalarFieldEnum = {
   id_cliente: 'id_cliente',
   nombre: 'nombre',
   apellido: 'apellido',
   celular: 'celular'
 };
 
-exports.Prisma.Detalle_compraScalarFieldEnum = {
-  id_detalle_compra: 'id_detalle_compra',
-  id_operacion_compra: 'id_operacion_compra',
-  id_producto: 'id_producto',
-  cantidad: 'cantidad',
-  precio_unitario: 'precio_unitario'
+exports.Prisma.Estado_operacionScalarFieldEnum = {
+  id_estado_operacion: 'id_estado_operacion',
+  nombre: 'nombre'
 };
 
-exports.Prisma.Detalle_ventaScalarFieldEnum = {
-  id_detalle_venta: 'id_detalle_venta',
-  id_operacion_venta: 'id_operacion_venta',
-  id_producto: 'id_producto',
-  cantidad: 'cantidad',
-  precio_unitario: 'precio_unitario'
-};
-
-exports.Prisma.Inventario_movimientosScalarFieldEnum = {
+exports.Prisma.Inventario_movimientoScalarFieldEnum = {
   id_movimiento: 'id_movimiento',
-  id_operacion: 'id_operacion',
-  id_producto: 'id_producto',
+  id_producto_variante: 'id_producto_variante',
+  tipo_movimiento: 'tipo_movimiento',
   cantidad: 'cantidad',
-  fecha: 'fecha',
-  motivo: 'motivo'
+  id_operacion: 'id_operacion',
+  fecha_movimiento: 'fecha_movimiento',
+  comentario: 'comentario'
+};
+
+exports.Prisma.Metodo_pagoScalarFieldEnum = {
+  id_metodo_pago: 'id_metodo_pago',
+  nombre: 'nombre'
 };
 
 exports.Prisma.OperacionScalarFieldEnum = {
   id_operacion: 'id_operacion',
   id_tipo_operacion: 'id_tipo_operacion',
-  estado: 'estado'
+  id_estado_operacion: 'id_estado_operacion',
+  fecha_creacion: 'fecha_creacion',
+  fecha_actualizacion: 'fecha_actualizacion'
 };
 
-exports.Prisma.Operacion_comprasScalarFieldEnum = {
-  id_operacion_compras: 'id_operacion_compras',
+exports.Prisma.Operacion_ventaScalarFieldEnum = {
+  id_venta: 'id_venta',
   id_operacion: 'id_operacion',
-  id_proveedor: 'id_proveedor',
-  fecha: 'fecha',
-  total: 'total',
-  metodo_pago: 'metodo_pago'
-};
-
-exports.Prisma.Operacion_gastosScalarFieldEnum = {
-  id_operacion_gastos: 'id_operacion_gastos',
-  id_operacion: 'id_operacion',
-  nombre: 'nombre',
-  detalle: 'detalle',
+  id_cliente: 'id_cliente',
+  id_metodo_pago: 'id_metodo_pago',
   total: 'total'
 };
 
-exports.Prisma.Operacion_ventasScalarFieldEnum = {
-  id_operacion_ventas: 'id_operacion_ventas',
-  id_operacion: 'id_operacion',
-  id_cliente: 'id_cliente',
-  fecha: 'fecha',
-  total: 'total',
-  metodo_pago: 'metodo_pago'
+exports.Prisma.PagoScalarFieldEnum = {
+  id_pago: 'id_pago',
+  id_venta: 'id_venta',
+  id_metodo_pago: 'id_metodo_pago',
+  monto_pagado: 'monto_pagado',
+  fecha_creacion: 'fecha_creacion'
 };
 
-exports.Prisma.Pagos_clientesScalarFieldEnum = {
-  id_pagos_clientes: 'id_pagos_clientes',
-  id_operacion_venta: 'id_operacion_venta',
-  monto_pago: 'monto_pago',
-  fecha_pago: 'fecha_pago',
-  metodo_pago: 'metodo_pago'
-};
-
-exports.Prisma.Producto_variantesScalarFieldEnum = {
-  id_variante: 'id_variante',
+exports.Prisma.ProductoScalarFieldEnum = {
   id_producto: 'id_producto',
-  talle: 'talle',
-  stock_actual: 'stock_actual',
-  color: 'color'
-};
-
-exports.Prisma.ProductosScalarFieldEnum = {
-  id_producto: 'id_producto',
+  id_categoria: 'id_categoria',
   nombre: 'nombre',
-  categoria: 'categoria',
   costo: 'costo',
   precio_unitario: 'precio_unitario'
 };
 
-exports.Prisma.ProveedoresScalarFieldEnum = {
-  id_proveedor: 'id_proveedor',
-  nombre: 'nombre',
-  celular: 'celular',
-  contacto: 'contacto'
+exports.Prisma.Producto_varianteScalarFieldEnum = {
+  id_producto_variante: 'id_producto_variante',
+  id_producto: 'id_producto',
+  talle: 'talle',
+  color: 'color',
+  stock: 'stock'
 };
 
 exports.Prisma.Tipo_operacionScalarFieldEnum = {
   id_tipo_operacion: 'id_tipo_operacion',
-  tipo: 'tipo'
+  nombre: 'nombre'
+};
+
+exports.Prisma.Venta_detalleScalarFieldEnum = {
+  id_venta: 'id_venta',
+  id_producto_variante: 'id_producto_variante',
+  cantidad: 'cantidad',
+  precio_unitario: 'precio_unitario'
 };
 
 exports.Prisma.SortOrder = {
@@ -252,21 +221,18 @@ exports.Prisma.NullsOrder = {
 
 
 exports.Prisma.ModelName = {
-  asiento_detalles: 'asiento_detalles',
-  asientos_contables: 'asientos_contables',
-  clientes: 'clientes',
-  detalle_compra: 'detalle_compra',
-  detalle_venta: 'detalle_venta',
-  inventario_movimientos: 'inventario_movimientos',
+  categoria_producto: 'categoria_producto',
+  cliente: 'cliente',
+  estado_operacion: 'estado_operacion',
+  inventario_movimiento: 'inventario_movimiento',
+  metodo_pago: 'metodo_pago',
   operacion: 'operacion',
-  operacion_compras: 'operacion_compras',
-  operacion_gastos: 'operacion_gastos',
-  operacion_ventas: 'operacion_ventas',
-  pagos_clientes: 'pagos_clientes',
-  producto_variantes: 'producto_variantes',
-  productos: 'productos',
-  proveedores: 'proveedores',
-  tipo_operacion: 'tipo_operacion'
+  operacion_venta: 'operacion_venta',
+  pago: 'pago',
+  producto: 'producto',
+  producto_variante: 'producto_variante',
+  tipo_operacion: 'tipo_operacion',
+  venta_detalle: 'venta_detalle'
 };
 
 /**

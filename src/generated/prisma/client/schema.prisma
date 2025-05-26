@@ -9,149 +9,125 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model asiento_detalles {
-  id_detalle         Int                @id
-  id_asiento         Int
-  cuenta             String             @db.Char(150)
-  debe               Float?             @default(0)
-  haber              Float?             @default(0)
-  asientos_contables asientos_contables @relation(fields: [id_asiento], references: [id_asiento], onDelete: NoAction, onUpdate: NoAction)
+model categoria_producto {
+  id_categoria_producto Int        @id @default(autoincrement())
+  nombre                String     @unique @db.VarChar(50)
+  producto              producto[]
 }
 
-model asientos_contables {
-  id_asiento       Int                @id
-  id_operacion     Int
-  fecha            DateTime           @db.Date
-  descripcion      String?
-  asiento_detalles asiento_detalles[]
-  operacion        operacion          @relation(fields: [id_operacion], references: [id_operacion], onDelete: NoAction, onUpdate: NoAction)
+model cliente {
+  id_cliente      Int               @id @default(autoincrement())
+  nombre          String            @db.VarChar(50)
+  apellido        String            @db.VarChar(50)
+  celular         String?           @db.VarChar(30)
+  operacion_venta operacion_venta[]
+
+  @@unique([nombre, apellido, celular])
 }
 
-model clientes {
-  id_cliente       Int                @id @default(autoincrement())
-  nombre           String             @db.VarChar(50)
-  apellido         String             @db.VarChar(50)
-  celular          String?            @db.VarChar(50)
-  operacion_ventas operacion_ventas[]
+model estado_operacion {
+  id_estado_operacion Int         @id @default(autoincrement())
+  nombre              String      @unique @db.VarChar(50)
+  operacion           operacion[]
 }
 
-model detalle_compra {
-  id_detalle_compra   Int               @id
-  id_operacion_compra Int
-  id_producto         Int
-  cantidad            Int
-  precio_unitario     Float
-  operacion_compras   operacion_compras @relation(fields: [id_operacion_compra], references: [id_operacion_compras], onDelete: NoAction, onUpdate: NoAction)
-  productos           productos         @relation(fields: [id_producto], references: [id_producto], onDelete: NoAction, onUpdate: NoAction)
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+model inventario_movimiento {
+  id_movimiento        Int               @id @default(autoincrement())
+  id_producto_variante Int
+  tipo_movimiento      String            @db.VarChar(20)
+  cantidad             Int
+  id_operacion         Int?
+  fecha_movimiento     DateTime          @default(now()) @db.Timestamp(6)
+  comentario           String?
+  operacion            operacion?        @relation(fields: [id_operacion], references: [id_operacion])
+  producto_variante    producto_variante @relation(fields: [id_producto_variante], references: [id_producto_variante], onDelete: Cascade)
+
+  @@index([id_operacion], map: "ix_im_operacion")
+  @@index([id_producto_variante], map: "ix_im_producto_variante")
 }
 
-model detalle_venta {
-  id_detalle_venta   Int              @id @default(autoincrement())
-  id_operacion_venta Int
-  id_producto        Int
-  cantidad           Int
-  precio_unitario    Float
-  operacion_ventas   operacion_ventas @relation(fields: [id_operacion_venta], references: [id_operacion_ventas], onDelete: NoAction, onUpdate: NoAction)
-  productos          productos        @relation(fields: [id_producto], references: [id_producto], onDelete: NoAction, onUpdate: NoAction)
-}
-
-model inventario_movimientos {
-  id_movimiento Int       @id
-  id_operacion  Int
-  id_producto   Int
-  cantidad      Int
-  fecha         DateTime  @db.Date
-  motivo        String
-  operacion     operacion @relation(fields: [id_operacion], references: [id_operacion], onDelete: NoAction, onUpdate: NoAction)
-  productos     productos @relation(fields: [id_producto], references: [id_producto], onDelete: NoAction, onUpdate: NoAction)
+model metodo_pago {
+  id_metodo_pago  Int               @id @default(autoincrement())
+  nombre          String            @unique @db.VarChar(50)
+  operacion_venta operacion_venta[]
+  pago            pago[]
 }
 
 model operacion {
-  id_operacion           Int                      @id @default(autoincrement())
-  id_tipo_operacion      Int
-  estado                 String                   @db.Char(50)
-  asientos_contables     asientos_contables[]
-  inventario_movimientos inventario_movimientos[]
-  tipo_operacion         tipo_operacion           @relation(fields: [id_tipo_operacion], references: [id_tipo_operacion], onDelete: NoAction, onUpdate: NoAction)
-  operacion_compras      operacion_compras[]
-  operacion_gastos       operacion_gastos[]
-  operacion_ventas       operacion_ventas[]
+  id_operacion          Int                     @id @default(autoincrement())
+  id_tipo_operacion     Int
+  id_estado_operacion   Int
+  fecha_creacion        DateTime                @default(now()) @db.Timestamp(6)
+  fecha_actualizacion   DateTime                @default(now()) @db.Timestamp(6)
+  inventario_movimiento inventario_movimiento[]
+  estado_operacion      estado_operacion        @relation(fields: [id_estado_operacion], references: [id_estado_operacion])
+  tipo_operacion        tipo_operacion          @relation(fields: [id_tipo_operacion], references: [id_tipo_operacion])
+  operacion_venta       operacion_venta[]
 }
 
-model operacion_compras {
-  id_operacion_compras Int              @id
-  id_operacion         Int
-  id_proveedor         Int
-  fecha                DateTime         @db.Date
-  total                Float
-  metodo_pago          String           @db.Char(100)
-  detalle_compra       detalle_compra[]
-  operacion            operacion        @relation(fields: [id_operacion], references: [id_operacion], onDelete: NoAction, onUpdate: NoAction)
-  proveedores          proveedores      @relation(fields: [id_proveedor], references: [id_proveedor], onDelete: NoAction, onUpdate: NoAction)
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+model operacion_venta {
+  id_venta       Int             @id @default(autoincrement())
+  id_operacion   Int
+  id_cliente     Int
+  id_metodo_pago Int
+  total          Decimal         @db.Decimal(12, 2)
+  cliente        cliente         @relation(fields: [id_cliente], references: [id_cliente])
+  metodo_pago    metodo_pago     @relation(fields: [id_metodo_pago], references: [id_metodo_pago])
+  operacion      operacion       @relation(fields: [id_operacion], references: [id_operacion], onDelete: Cascade, onUpdate: NoAction)
+  pago           pago[]
+  venta_detalle  venta_detalle[]
 }
 
-model operacion_gastos {
-  id_operacion_gastos Int       @id
-  id_operacion        Int
-  nombre              String    @db.Char(100)
-  detalle             String
-  total               Float
-  operacion           operacion @relation(fields: [id_operacion], references: [id_operacion], onDelete: NoAction, onUpdate: NoAction)
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+model pago {
+  id_pago         Int             @id @default(autoincrement())
+  id_venta        Int
+  id_metodo_pago  Int
+  monto_pagado    Decimal         @db.Decimal(12, 2)
+  fecha_creacion  DateTime        @default(now()) @db.Timestamp(6)
+  metodo_pago     metodo_pago     @relation(fields: [id_metodo_pago], references: [id_metodo_pago], onDelete: NoAction, onUpdate: NoAction)
+  operacion_venta operacion_venta @relation(fields: [id_venta], references: [id_venta], onDelete: Cascade, onUpdate: NoAction)
 }
 
-model operacion_ventas {
-  id_operacion_ventas Int              @id @default(autoincrement())
-  id_operacion        Int
-  id_cliente          Int
-  fecha               DateTime         @db.Date
-  total               Float
-  metodo_pago         String           @db.Char(100)
-  detalle_venta       detalle_venta[]
-  clientes            clientes         @relation(fields: [id_cliente], references: [id_cliente], onDelete: NoAction, onUpdate: NoAction)
-  operacion           operacion        @relation(fields: [id_operacion], references: [id_operacion], onDelete: NoAction, onUpdate: NoAction)
-  pagos_clientes      pagos_clientes[]
+model producto {
+  id_producto        Int                 @id @default(autoincrement())
+  id_categoria       Int
+  nombre             String              @db.VarChar(100)
+  costo              Decimal             @db.Decimal(10, 2)
+  precio_unitario    Decimal             @db.Decimal(10, 2)
+  categoria_producto categoria_producto  @relation(fields: [id_categoria], references: [id_categoria_producto])
+  producto_variante  producto_variante[]
 }
 
-model pagos_clientes {
-  id_pagos_clientes  Int              @id
-  id_operacion_venta Int
-  monto_pago         Float
-  fecha_pago         DateTime         @db.Date
-  metodo_pago        String           @db.Char(100)
-  operacion_ventas   operacion_ventas @relation(fields: [id_operacion_venta], references: [id_operacion_ventas], onDelete: NoAction, onUpdate: NoAction)
-}
+model producto_variante {
+  id_producto_variante  Int                     @id @default(autoincrement())
+  id_producto           Int
+  talle                 String                  @db.VarChar(20)
+  color                 String                  @db.VarChar(30)
+  stock                 Int
+  inventario_movimiento inventario_movimiento[]
+  producto              producto                @relation(fields: [id_producto], references: [id_producto], onDelete: Cascade)
+  venta_detalle         venta_detalle[]
 
-model producto_variantes {
-  id_variante  Int       @id @default(autoincrement())
-  id_producto  Int
-  talle        String    @db.VarChar(10)
-  stock_actual Int       @default(0)
-  color        String    @db.VarChar(20)
-  productos    productos @relation(fields: [id_producto], references: [id_producto], onDelete: NoAction, onUpdate: NoAction)
-}
-
-model productos {
-  id_producto            Int                      @id @default(autoincrement())
-  nombre                 String                   @db.VarChar(50)
-  categoria              String                   @db.VarChar(50)
-  costo                  Float
-  precio_unitario        Float
-  detalle_compra         detalle_compra[]
-  detalle_venta          detalle_venta[]
-  inventario_movimientos inventario_movimientos[]
-  producto_variantes     producto_variantes[]
-}
-
-model proveedores {
-  id_proveedor      Int                 @id
-  nombre            String              @db.Char(50)
-  celular           String?             @db.Char(50)
-  contacto          String?             @db.Char(50)
-  operacion_compras operacion_compras[]
+  @@unique([id_producto, talle, color])
 }
 
 model tipo_operacion {
-  id_tipo_operacion Int         @id
-  tipo              String      @db.Char(50)
+  id_tipo_operacion Int         @id @default(autoincrement())
+  nombre            String      @unique @db.VarChar(50)
   operacion         operacion[]
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+model venta_detalle {
+  id_venta             Int
+  id_producto_variante Int
+  cantidad             Int
+  precio_unitario      Decimal           @db.Decimal(10, 2)
+  producto_variante    producto_variante @relation(fields: [id_producto_variante], references: [id_producto_variante], onUpdate: NoAction)
+  operacion_venta      operacion_venta   @relation(fields: [id_venta], references: [id_venta], onDelete: Cascade, onUpdate: NoAction)
+
+  @@id([id_venta, id_producto_variante])
 }

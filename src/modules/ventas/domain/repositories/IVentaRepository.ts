@@ -2,16 +2,19 @@ import { DetalleVentaDTO } from '../../application/dtos/DetalleVentaDTO';
 import { VentaDTO } from '../../application/dtos/VentaDTO';
 
 export interface IVentaRepository {
+    withTransaction<T>(fn: (tx: any) => Promise<T>): Promise<T>;
+    
     crearVenta(
         venta: VentaDTO, 
-        detalles: DetalleVentaDTO[]
+        detalles: DetalleVentaDTO[],
+        tx?: any // Cliente de transacción opcional
     ): Promise<number>;
 
-    listarVentas(): Promise<VentaDTO[]>;
+    listarVentas(tx?: any): Promise<VentaDTO[]>;
 
-    obtenerVentaPorId(id: number): Promise<VentaDTO>;
+    obtenerVentaPorId(id: number, tx?: any): Promise<VentaDTO>;
 
-    listarDetallesPorVenta(id: number): Promise<DetalleVentaDTO[]>;
+    listarDetallesPorVenta(id: number, tx?: any): Promise<DetalleVentaDTO[]>;
 
-    eliminarVenta(id: number): Promise<boolean>;
+    eliminarVenta(id: number, tx?: any): Promise<boolean>;
 }

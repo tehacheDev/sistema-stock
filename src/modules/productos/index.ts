@@ -1,13 +1,13 @@
 // Application
-export { RegistrarProducto } from './application/useCases/productos/RegistrarProductoConVariantes';
-export { ListarProductos } from './application/useCases/productos/ListarProductos';
-export { ListarVariantes } from './application/useCases/variantes/ListarVariantes';
-export { ListarVariante } from './application/useCases/variantes/ListarVariante';
-export { ActualizarProducto } from './application/useCases/productos/ActualizarProducto';
-export { ActualizarVariante } from './application/useCases/variantes/ActualizarVariante';
-export { EliminarProducto } from './application/useCases/productos/EliminarProducto';
-export { EliminarVariante } from './application/useCases/variantes/EliminarVariante';
-export { RestarStock } from './application/useCases/variantes/RestarStock';
+export { CrearProducto } from './application/useCases/productos/crearProducto';
+export { ListarProductos } from './application/useCases/productos/listarProductos';
+export { ActualizarProducto } from './application/useCases/productos/actualizarProducto';
+export { EliminarProducto } from './application/useCases/productos/eliminarProducto';
+
+export { ListarVariantes } from './application/useCases/variantes/listarVariantes';
+export { ListarVariantePorId } from './application/useCases/variantes/listarVariantePorId';
+export { ActualizarVariante } from './application/useCases/variantes/actualizarVariante';
+export { EliminarVariante } from './application/useCases/variantes/eliminarVariante';
 
 export * from './application/dtos/ProductoDTO';
 export * from './application/dtos/VarianteDTO';
@@ -22,3 +22,6 @@ export * from './infrastructure/db/PrismaProductoRepository';
 
 // Routes
 export { default as productoRoutes } from './infrastructure/routes/productoRoutes';
+
+// Controllers
+export { ProductoController } from './infrastructure/controllers/productoController';

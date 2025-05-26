@@ -1,18 +1,18 @@
 import { Router } from 'express';
 import { paramsSchema } from '../../../../shared/schemas/paramsSchema';
-import { ProductoController } from '../../controllers/productoController';
+import { ProductoController } from '../../infrastructure/controllers/productoController';
 import { crearProductoSchema } from '../../../../shared/schemas/productoSchema';
-import { PrismaProductoRepository } from '../db/PrismaProductoRepository';
 import { validateBody, validateParams } from '../../../../shared/middlewares/validate';
 import { 
   ListarProductos, 
   ListarVariantes, 
-  ListarVariante,
-  RegistrarProducto, 
+  ListarVariantePorId,
+  CrearProducto, 
   ActualizarProducto, 
   ActualizarVariante, 
   EliminarProducto, 
-  EliminarVariante
+  EliminarVariante,
+  PrismaProductoRepository
 } from '../../index';
 
 const router = Router();
@@ -21,8 +21,8 @@ const repo = new PrismaProductoRepository();
 const controller = new ProductoController(
   new ListarProductos(repo),
   new ListarVariantes(repo),
-  new ListarVariante(repo),
-  new RegistrarProducto(repo),
+  new ListarVariantePorId(repo),
+  new CrearProducto(repo),
   new ActualizarProducto(repo),
   new ActualizarVariante(repo),
   new EliminarProducto(repo),

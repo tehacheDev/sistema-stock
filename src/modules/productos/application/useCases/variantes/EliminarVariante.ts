@@ -4,7 +4,7 @@ import { IProductoRepository } from '../../../domain/repositories/IProductoRepos
 export class EliminarVariante {
   constructor(private readonly productoRepo: IProductoRepository) {}
 
-  async eliminarVariante(id: number): Promise<void> {
+  async ejecutar(id: number): Promise<void> {
     const varianteEliminada = await this.productoRepo.eliminarVariante(id);
     if (!varianteEliminada) throw new NotFoundError('Variante no encontrada');
   }

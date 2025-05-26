@@ -1,7 +1,9 @@
+import { Decimal } from "@prisma/client/runtime/library";
+
 export interface DetalleVentaDTO {
-    id_operacion_venta: number,
-    id_producto: number,
-    cantidad: number,
-    precio_unitario: number,
-    id_detalle_venta?: number
+    id_venta: number;
+    id_producto_variante: number;
+    cantidad: number;
+    precio_unitario: Decimal;
+    id_detalle_venta?: number;
 }

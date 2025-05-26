@@ -1,11 +1,11 @@
-import { IProductoRepository } from '../../../domain/repositories/IProductoRepository';
-import logger from '../../../../../shared/utils/logger';
+// import { IProductoRepository } from '../../../domain/repositories/IProductoRepository';
+// import logger from '../../../../../shared/utils/logger';
 
-export class RestarStock {
-  constructor(private readonly productoRepo: IProductoRepository) {}
+// export class RestarStock {
+//   constructor(private readonly productoRepo: IProductoRepository) {}
 
-  async restarStock(id: number, cantidad: number): Promise<void> {
-    const response = await this.productoRepo.restarStock(id, cantidad);
-    logger.info(`Stock actualizado => ${response}`);
-  }
-}
+//   async ejecutar(id: number, cantidad: number): Promise<void> {
+//     const response = await this.productoRepo.restarStock(id, cantidad);
+//     logger.info(`Stock actualizado => ${response}`);
+//   }
+// }
