@@ -1,8 +1,8 @@
 // Application
 export { CrearCliente } from './application/usecases/crearCliente';
-export { ListarCliente } from './application/usecases/listarCliente';
-export { ActualizarCliente } from './application/usecases/actualizarCliente';
-export { EliminarCliente } from './application/usecases/eliminarCliente';
+export { ListarCliente } from './application/usecases/ListarCliente';
+export { ActualizarCliente } from './application/usecases/ActualizarCliente';
+export { EliminarCliente } from './application/usecases/EliminarCliente';
 export { ListarClientePorId } from './application/usecases/listarClientePorId';
 export * from './application/dtos/ClienteDTO';
 // Domain
@@ -14,4 +14,4 @@ export * from './infrastructure/db/PrismaClienteRepository';
 export { default as clienteRoutes } from './infrastructure/routes/clienteRoute';
 
 // Controllers
-export { ClienteController } from './infrastructure/controllers/clientesController';
+export * from './infrastructure/controllers/clientesController';

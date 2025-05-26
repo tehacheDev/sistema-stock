@@ -1,13 +1,13 @@
 // Application
 export { CrearProducto } from './application/useCases/productos/crearProducto';
-export { ListarProductos } from './application/useCases/productos/listarProductos';
-export { ActualizarProducto } from './application/useCases/productos/actualizarProducto';
-export { EliminarProducto } from './application/useCases/productos/eliminarProducto';
+export { ListarProductos } from './application/useCases/productos/ListarProductos';
+export { ActualizarProducto } from './application/useCases/productos/ActualizarProducto';
+export { EliminarProducto } from './application/useCases/productos/EliminarProducto';
 
-export { ListarVariantes } from './application/useCases/variantes/listarVariantes';
+export { ListarVariantes } from './application/useCases/variantes/ListarVariantes';
 export { ListarVariantePorId } from './application/useCases/variantes/listarVariantePorId';
-export { ActualizarVariante } from './application/useCases/variantes/actualizarVariante';
-export { EliminarVariante } from './application/useCases/variantes/eliminarVariante';
+export { ActualizarVariante } from './application/useCases/variantes/ActualizarVariante';
+export { EliminarVariante } from './application/useCases/variantes/EliminarVariante';
 
 export * from './application/dtos/ProductoDTO';
 export * from './application/dtos/VarianteDTO';
